@@ -747,6 +747,26 @@
       transform: translateY(0);
     }
 
+    .view-gallery-hint {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 28px;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.project-visual:hover .view-gallery-hint { opacity: 1; }
+.view-gallery-hint span {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
     /* ── MOBILE ── */
     @media (max-width: 900px) {
       nav { padding: 20px 24px; }
@@ -807,7 +827,7 @@
       </p>
       <div class="hero-cta">
         <a href="#projects" class="btn-primary">View Projects</a>
-        <a href="#contact" class="btn-ghost">Let's Collaborate</a>
+        <a href="#contact" class="btn-ghost">Let's collaborate</a>
       </div>
     </div>
     <div class="hero-right">
@@ -932,7 +952,7 @@
 
     <!-- Project 01 -->
     <div class="project-block reveal">
-      <div class="project-visual">
+      <div class="project-visual" onclick="window.location='gallery-01.html'" style="cursor:pointer">
         <span class="project-num">01</span>
         <img
         src="images/project-01.png"
@@ -940,6 +960,9 @@
           class="project-img"
         />
         <span class="project-tag">Residential</span>
+        <div class="view-gallery-hint">
+          <span>View Gallery →</span>
+        </div>
       </div>
       <div class="project-info">
         <p class="project-type">Project 01 — Binyam Ali Architects</p>
@@ -970,7 +993,7 @@
 
     <!-- Project 02 -->
     <div class="project-block reverse reveal">
-      <div class="project-visual">
+      <div class="project-visual" onclick="window.location='gallery-02.html'" style="cursor:pointer">
         <span class="project-num">02</span>
         <img
         src="images/project-02.PNG"
@@ -978,6 +1001,9 @@
           class="project-img"
         />
         <span class="project-tag">Urban Planning</span>
+        <div class="view-gallery-hint">
+          <span>View Gallery →</span>
+        </div>
       </div>
       <div class="project-info">
         <p class="project-type">Project 02 — Unity University</p>
@@ -1008,7 +1034,7 @@
 
     <!-- Project 03 -->
     <div class="project-block reveal">
-      <div class="project-visual">
+      <div class="project-visual" onclick="window.location='gallery-03.html'" style="cursor:pointer">
         <span class="project-num">03</span>
         <img
         src="images/project-03.png"
@@ -1016,6 +1042,9 @@
           class="project-img"
         />
         <span class="project-tag">Commercial</span>
+        <div class="view-gallery-hint">
+          <span>View Gallery →</span>
+        </div>
       </div>
       <div class="project-info">
         <p class="project-type">Project 03 — Miseso Interior Design</p>
@@ -1046,7 +1075,7 @@
 
     <!-- Project 04 -->
     <div class="project-block reverse reveal">
-      <div class="project-visual">
+      <div class="project-visual" onclick="window.location='gallery-04.html'" style="cursor:pointer">
         <span class="project-num">04</span>
         <img
         src="images/project-04.PNG"
@@ -1054,6 +1083,9 @@
           class="project-img"
         />
         <span class="project-tag">Residential</span>
+        <div class="view-gallery-hint">
+          <span>View Gallery →</span>
+        </div>
       </div>
       <div class="project-info">
         <p class="project-type">Project 04 — Miseso Interior Design</p>
@@ -1084,7 +1116,7 @@
 
     <!-- Project 05 -->
     <div class="project-block reveal">
-      <div class="project-visual">
+      <div class="project-visual" onclick="window.location='gallery-05.html'" style="cursor:pointer">
         <span class="project-num">05</span>
         <img
         src="images/project-05.JPG"
@@ -1092,6 +1124,9 @@
           class="project-img"
         />
         <span class="project-tag">Freelance</span>
+        <div class="view-gallery-hint">
+          <span>View Gallery →</span>
+        </div>
       </div>
       <div class="project-info">
         <p class="project-type">Project 05 — Freelance</p>

@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project 01 — Residential House | Bethelhem Kebere</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #FFFFFF;
+      --black: #111111;
+      --gray: #8B8B8B;
+      --light: #F7F6F4;
+      --gold: #C9A96E;
+      --border: #E8E6E2;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 60px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--black);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+      border-bottom: 1px solid var(--black);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .back-btn:hover { color: var(--gold); border-color: var(--gold); }
+
+    /* ── HERO BANNER ── */
+    .gallery-hero {
+      margin-top: 80px;
+      position: relative;
+      height: 55vh;
+      overflow: hidden;
+      background: var(--light);
+    }
+
+    .gallery-hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.6);
+    }
+
+    .gallery-hero-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 60px;
+      background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.1) 60%, transparent 100%);
+    }
+
+    .gallery-project-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 120px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.08);
+      line-height: 1;
+      position: absolute;
+      bottom: 20px;
+      right: 40px;
+      user-select: none;
+    }
+
+    .gallery-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .gallery-hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .gallery-hero-meta {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .hero-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .hero-meta-key {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+    .hero-meta-val {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* ── DESCRIPTION ── */
+    .gallery-desc-section {
+      padding: 72px 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .desc-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .desc-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--black);
+      margin-bottom: 24px;
+    }
+
+    .desc-divider {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      margin-bottom: 24px;
+    }
+
+    .desc-text {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--gray);
+    }
+
+    .desc-specs {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .spec-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .spec-row:first-child { border-top: 1px solid var(--border); }
+
+    .spec-key {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+    .spec-val {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--black);
+      text-align: right;
+    }
+
+    /* ── GALLERY GRID ── */
+    .gallery-section {
+      padding: 80px 60px;
+    }
+
+    .gallery-section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 48px;
+    }
+
+    .gallery-section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      font-weight: 300;
+      color: var(--black);
+    }
+
+    .gallery-count {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--gray);
+      letter-spacing: 0.05em;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .gallery-grid .item-wide {
+      grid-column: span 2;
+    }
+    .gallery-grid .item-tall {
+      grid-row: span 2;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      background: var(--light);
+      cursor: pointer;
+      aspect-ratio: 4/3;
+    }
+    .gallery-item.item-wide { aspect-ratio: 16/7; }
+    .gallery-item.item-tall { aspect-ratio: auto; }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease, filter 0.4s ease;
+      filter: grayscale(15%);
+    }
+    .gallery-item:hover img {
+      transform: scale(1.04);
+      filter: grayscale(0%);
+    }
+
+    .gallery-item-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s ease;
+    }
+    .gallery-item:hover .gallery-item-overlay {
+      background: rgba(0,0,0,0.35);
+    }
+
+    .gallery-zoom-icon {
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(255,255,255,0.8);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      color: white;
+      font-size: 18px;
+    }
+    .gallery-item:hover .gallery-zoom-icon {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* ── VIDEO SECTION ── */
+    .video-section {
+      padding: 0 60px 80px;
+      border-top: 1px solid var(--border);
+      padding-top: 80px;
+    }
+
+    .video-section-header {
+      margin-bottom: 48px;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .video-item {
+      position: relative;
+      background: var(--black);
+      border-radius: 0;
+      overflow: hidden;
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+    }
+
+    .video-wrapper video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Custom video play overlay */
+    .video-play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.4);
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .video-play-overlay:hover { background: rgba(0,0,0,0.2); }
+    .video-play-overlay.hidden { display: none; }
+
+    .play-btn {
+      width: 64px;
+      height: 64px;
+      border: 2px solid rgba(255,255,255,0.8);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .video-play-overlay:hover .play-btn {
+      transform: scale(1.08);
+      border-color: var(--gold);
+    }
+    .play-icon {
+      width: 0;
+      height: 0;
+      border-top: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+      border-left: 20px solid white;
+      margin-left: 4px;
+    }
+
+    .video-label {
+      padding: 16px 0 0;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    /* No media placeholder */
+    .no-media {
+      padding: 60px;
+      text-align: center;
+      border: 1px dashed var(--border);
+      border-radius: 0;
+    }
+    .no-media p {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--gray);
+      line-height: 1.7;
+    }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,0.95);
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+    .lightbox.active { display: flex; }
+
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 85vh;
+      object-fit: contain;
+      user-select: none;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 24px;
+      right: 32px;
+      font-size: 28px;
+      color: rgba(255,255,255,0.6);
+      cursor: pointer;
+      transition: color 0.2s;
+      background: none;
+      border: none;
+      line-height: 1;
+    }
+    .lightbox-close:hover { color: var(--white); }
+
+    .lightbox-prev,
+    .lightbox-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.7);
+      font-size: 20px;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .lightbox-prev:hover,
+    .lightbox-next:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .lightbox-prev { left: 24px; }
+    .lightbox-next { right: 24px; }
+
+    .lightbox-counter {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.15em;
+    }
+
+    /* ── NEXT PROJECT ── */
+    .next-project {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 48px 60px;
+      border-top: 1px solid var(--border);
+      text-decoration: none;
+      transition: background 0.2s;
+      background: var(--white);
+    }
+    .next-project:hover { background: var(--light); }
+
+    .next-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .next-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 300;
+      color: var(--black);
+    }
+    .next-arrow {
+      font-size: 32px;
+      color: var(--gray);
+      transition: color 0.2s, transform 0.2s;
+    }
+    .next-project:hover .next-arrow {
+      color: var(--gold);
+      transform: translateX(8px);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 28px 60px;
+      background: #0A0A0A;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.4);
+    }
+    .footer-copy {
+      font-size: 11px;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.08em;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      nav { padding: 20px 24px; }
+      .gallery-hero-overlay { padding: 32px 24px; }
+      .gallery-project-num { display: none; }
+      .gallery-hero-meta { gap: 20px; }
+      .gallery-desc-section { grid-template-columns: 1fr; padding: 48px 24px; gap: 48px; }
+      .gallery-section { padding: 60px 24px; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .gallery-grid .item-wide { grid-column: span 2; }
+      .video-section { padding: 60px 24px; }
+      .video-grid { grid-template-columns: 1fr; }
+      .next-project { padding: 36px 24px; }
+      footer { flex-direction: column; gap: 12px; padding: 20px 24px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       ✏️  EDIT THIS DATA SECTION FOR EACH PROJECT
+  ============================================================ -->
+  <script>
+ const PROJECT = {
+  num: "04",
+  tag: "Residential",
+  title: "Luxury Residential Interior",
+  firm: "Miseso Interior Design",
+  specs: [
+    { key: "Location",     val: "Bole Bulbula, Addis Ababa" },
+    { key: "Role",         val: "Interior Designer" },
+    { key: "Project Type", val: "Residential House" },
+    { key: "Total Area",   val: "420 m²" },
+    { key: "Year",         val: "2025–2026" },
+    { key: "Firm",         val: "Miseso Interior Design" },
+  ],
+  description: `A 420 m² luxury residential interior developed to create a modern and sophisticated living environment for a discerning client in Bole Bulbula, Addis Ababa.
+
+The design brings together contemporary furniture selections, decorative feature lighting, marble and stone finishes, custom millwork, and carefully curated art and accessories — delivering a visually cohesive home that reflects the client's personality and lifestyle.
+
+Key spaces include the grand living room with a feature fireplace wall, formal dining, a master bedroom suite with custom wardrobe joinery, and a chef's kitchen.`,
+  images: [
+    { src: "images/project-04.PNG",  caption: "Living Room" },
+    { src: "images/p04-img2.jpg",    caption: "Living Room" },
+   // { src: "images/p04-img3.jpg",    caption: "Lighting Plan" },
+    { src: "images/p04-img4.jpg",    caption: "TV Wall Detail" },
+    { src: "images/p04-img5.jpg",    caption: "Master Bedroom" },
+    { src: "images/p04-img6.jpg",    caption: "Entrance Hall" },
+    
+  ],
+  videos: [
+    // { src: "images/p04-video1.mp4", label: "Living Room Tour" },
+    // { src: "images/p04-video2.mp4", label: "Master Bedroom Tour" },
+  ],
+  next: {
+    href: "gallery-05.html",
+    label: "Next Project",
+    name: "Residential House — Welo Sefer",
+  },
+};
+  </script>
+  <!-- ============================================================ -->
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">Bethelhem <span>Kebere</span></a>
+    <a href="index.html#projects" class="back-btn">← Back to Portfolio</a>
+  </nav>
+
+  <!-- HERO BANNER (filled by JS) -->
+  <div class="gallery-hero" id="galleryHero">
+    <img id="heroBannerImg" class="gallery-hero-img" src="" alt="" />
+    <div class="gallery-hero-overlay">
+      <span class="gallery-tag" id="heroTag"></span>
+      <h1 class="gallery-hero-title" id="heroTitle"></h1>
+      <div class="gallery-hero-meta" id="heroMeta"></div>
+    </div>
+    <span class="gallery-project-num" id="heroNum"></span>
+  </div>
+
+  <!-- DESCRIPTION -->
+  <section class="gallery-desc-section">
+    <div>
+      <p class="desc-label" id="descFirm"></p>
+      <h2 class="desc-title" id="descTitle"></h2>
+      <div class="desc-divider"></div>
+      <p class="desc-text" id="descText"></p>
+    </div>
+    <div class="desc-specs" id="descSpecs"></div>
+  </section>
+
+  <!-- IMAGE GALLERY -->
+  <section class="gallery-section">
+    <div class="gallery-section-header">
+      <div>
+        <p class="desc-label">Visual Documentation</p>
+        <h2 class="gallery-section-title">Image Gallery</h2>
+      </div>
+      <span class="gallery-count" id="imageCount"></span>
+    </div>
+    <div class="gallery-grid" id="galleryGrid"></div>
+  </section>
+
+  <!-- VIDEO SECTION -->
+  <section class="video-section" id="videoSection">
+    <div class="video-section-header">
+      <p class="desc-label">Project Footage</p>
+      <h2 class="gallery-section-title">Videos</h2>
+    </div>
+    <div class="video-grid" id="videoGrid"></div>
+  </section>
+
+  <!-- NEXT PROJECT -->
+  <a class="next-project" id="nextProject" href="#">
+    <div>
+      <p class="next-label" id="nextLabel"></p>
+      <p class="next-name" id="nextName"></p>
+    </div>
+    <span class="next-arrow">→</span>
+  </a>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-name">Bethelhem Kebere</span>
+    <span class="footer-copy">© 2026 · Interior Architecture & Urban Planning</span>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <button class="lightbox-prev" onclick="changeImage(-1)">‹</button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="" />
+    <button class="lightbox-next" onclick="changeImage(1)">›</button>
+    <span class="lightbox-counter" id="lightboxCounter"></span>
+  </div>
+
+  <script>
+    // ── RENDER PAGE FROM DATA ──────────────────────────────────
+    const P = PROJECT;
+    let currentIndex = 0;
+
+    // Hero
+    document.getElementById("heroBannerImg").src = P.images[0]?.src || "";
+    document.getElementById("heroBannerImg").alt = P.title;
+    document.getElementById("heroTag").textContent = P.tag;
+    document.getElementById("heroTitle").textContent = P.title;
+    document.getElementById("heroNum").textContent = P.num;
+
+    // Hero meta — show first 4 specs
+    const metaEl = document.getElementById("heroMeta");
+    P.specs.slice(0, 4).forEach(s => {
+      metaEl.innerHTML += `
+        <div class="hero-meta-item">
+          <span class="hero-meta-key">${s.key}</span>
+          <span class="hero-meta-val">${s.val}</span>
+        </div>`;
+    });
+
+    // Description
+    document.getElementById("descFirm").textContent = `Project ${P.num} — ${P.firm}`;
+    document.getElementById("descTitle").textContent = P.title;
+    document.getElementById("descText").innerHTML = P.description.replace(/\n\n/g, '</p><p class="desc-text" style="margin-top:16px">');
+
+    // Specs
+    const specsEl = document.getElementById("descSpecs");
+    P.specs.forEach(s => {
+      specsEl.innerHTML += `
+        <div class="spec-row">
+          <span class="spec-key">${s.key}</span>
+          <span class="spec-val">${s.val}</span>
+        </div>`;
+    });
+
+    // Image count
+    document.getElementById("imageCount").textContent = `${P.images.length} Images`;
+
+    // Gallery grid — layout patterns alternate
+    const grid = document.getElementById("galleryGrid");
+    P.images.forEach((img, i) => {
+      const isWide = i === 0; // first image is wide
+      const div = document.createElement("div");
+      div.className = `gallery-item${isWide ? " item-wide" : ""}`;
+      div.onclick = () => openLightbox(i);
+      div.innerHTML = `
+        <img src="${img.src}" alt="${img.caption}" loading="lazy" />
+        <div class="gallery-item-overlay">
+          <div class="gallery-zoom-icon">+</div>
+        </div>`;
+      grid.appendChild(div);
+    });
+
+    // Videos
+    const videoSection = document.getElementById("videoSection");
+    const videoGrid = document.getElementById("videoGrid");
+
+    if (P.videos.length === 0) {
+      videoSection.innerHTML = `
+        <div class="video-section-header">
+          <p class="desc-label">Project Footage</p>
+          <h2 class="gallery-section-title">Videos</h2>
+        </div>
+        <div class="no-media">
+          <p>No video footage available for this project yet.</p>
+        </div>`;
+    } else {
+      P.videos.forEach((vid, i) => {
+        const div = document.createElement("div");
+        div.className = "video-item";
+        div.innerHTML = `
+          <div class="video-wrapper">
+            <video id="vid-${i}" src="${vid.src}" preload="metadata"></video>
+            <div class="video-play-overlay" id="overlay-${i}" onclick="playVideo(${i})">
+              <div class="play-btn">
+                <div class="play-icon"></div>
+              </div>
+            </div>
+          </div>
+          <p class="video-label">${vid.label}</p>`;
+        videoGrid.appendChild(div);
+      });
+    }
+
+    // Next project
+    document.getElementById("nextProject").href = P.next.href;
+    document.getElementById("nextLabel").textContent = P.next.label;
+    document.getElementById("nextName").textContent = P.next.name;
+
+    // ── LIGHTBOX ──────────────────────────────────────────────
+    function openLightbox(index) {
+      currentIndex = index;
+      document.getElementById("lightbox").classList.add("active");
+      updateLightbox();
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLightbox() {
+      document.getElementById("lightbox").classList.remove("active");
+      document.body.style.overflow = "";
+    }
+
+    function changeImage(dir) {
+      currentIndex = (currentIndex + dir + P.images.length) % P.images.length;
+      updateLightbox();
+    }
+
+    function updateLightbox() {
+      const img = P.images[currentIndex];
+      document.getElementById("lightboxImg").src = img.src;
+      document.getElementById("lightboxImg").alt = img.caption;
+      document.getElementById("lightboxCounter").textContent =
+        `${currentIndex + 1} / ${P.images.length}  ·  ${img.caption}`;
+    }
+
+    // Keyboard nav for lightbox
+    document.addEventListener("keydown", e => {
+      const lb = document.getElementById("lightbox");
+      if (!lb.classList.contains("active")) return;
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") changeImage(-1);
+      if (e.key === "ArrowRight") changeImage(1);
+    });
+
+    // Close lightbox on backdrop click
+    document.getElementById("lightbox").addEventListener("click", function(e) {
+      if (e.target === this) closeLightbox();
+    });
+
+    // ── VIDEO PLAY ────────────────────────────────────────────
+    function playVideo(i) {
+      const video = document.getElementById(`vid-${i}`);
+      const overlay = document.getElementById(`overlay-${i}`);
+      overlay.classList.add("hidden");
+      video.controls = true;
+      video.play();
+      video.addEventListener("pause", () => {
+        overlay.classList.remove("hidden");
+        video.controls = false;
+      });
+    }
+
+    // ── CLICK PROJECT IMAGE IN INDEX TO NAVIGATE HERE ─────────
+    // Make sure in index.html the project-visual divs have:
+    // onclick="window.location='gallery-01.html'" style="cursor:pointer"
+  </script>
+</body>
+</html>
